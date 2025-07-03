@@ -1,0 +1,156 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ex: <http://robotics.org/explainability#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Concept Scheme
+ex:explanationScheme rdf:type skos:ConceptScheme;
+    skos:prefLabel "Esquema de Explicación"@es;
+    skos:description "Un esquema que organiza conceptos relacionados con explicaciones en sistemas explicables."@es;
+    skos:hasTopConcept ex:explanation .
+
+# Top-level concept: Explicación
+ex:explanation rdf:type skos:Concept;
+    skos:prefLabel "Explicación"@es;
+    skos:definition "Información proporcionada al usuario y entendible por el mismo, que esta formada por datos interpretables, y mejora el entendimiento acerca del comportamiento del sistema."@es;
+    owl:hasPart ex:temporality, ex:nivel_de_detalle, ex:format, ex:type, ex:autonomy .
+
+# Temporalidad
+ex:temporality rdf:type skos:Concept;
+    skos:prefLabel "Temporalidad"@es;
+    skos:definition "Espacio de tiempo en el cual se proporciona la explicación."@es;
+    owl:isPartOf ex:explanation .
+    
+ex:prebehavior rdf:type skos:Concept;
+        skos:prefLabel "Precomportamiento"@es;
+        skos:definition "La explicación se proporciona antes del inicio del comportamiento del sistema."@es;
+        skos:broader ex:temporality .
+
+ex:real_time rdf:type skos:Concept;
+        skos:prefLabel "Tiempo Real"@es;
+        skos:definition "La explicación se proporciona mientras el sistema está realizando su comportamiento."@es;
+        skos:broader ex:temporality .
+
+ex:postbehavior rdf:type skos:Concept;
+        skos:prefLabel "Postcomportamiento"@es;
+        skos:definition "La explicación se proporciona una vez el comportamiento ha finalizado."@es;
+        skos:broader ex:temporality .
+
+# Nivel de detalle
+ex:level_of_detail rdf:type skos:Concept;
+    skos:prefLabel "Nivel de Detalle"@es;
+    skos:definition "Estrategia estructurada que establece cómo se presenta la explicación al usuario. Difiere según el enfoque."@es;
+    owl:isPartOf ex:explanation .
+
+# Autonomía
+ex:autonomy rdf:type skos:Concept;
+    skos:prefLabel "Autonomía"@es;
+    skos:definition "Mecanismo que provee la explicación."@es;
+    owl:isPartOf ex:explanation .
+
+
+ex:proactive rdf:type skos:Concept;
+        skos:prefLabel "Proactiva"@es;
+        skos:definition "El sistema decide cuando se proporciona la explicación."@es;
+        skos:broader ex:autonomy .
+
+ex:reactive rdf:type skos:Concept;
+        skos:prefLabel "Reactiva"@es;
+        skos:definition "La explicación es proporcionada bajo demanda."@es;
+        skos:broader ex:autonomy .
+
+# Tipo
+ex:type rdf:type skos:Concept;
+    skos:prefLabel "Tipo"@es;
+    skos:definition "Estrategia estructurada que establece cómo se presenta la explicación al usuario. Difiere según el enfoque."@es;
+    owl:isPartOf ex:explanation .
+
+ex:centrado_en_usuario rdf:type skos:Concept;
+        skos:prefLabel "Centrado en el usuario"@es;
+        skos:definition "Tipo de explicación que tiene en cuenta la intuición del usuario para presentar la explicación."@es;
+        skos:broader ex:type .
+
+ex:probabilistic rdf:type skos:Concept;
+        skos:prefLabel "Probabilística"@es;
+        skos:definition "Presenta la explicación a través de una probabilidad de éxito."@es;
+        skos:broader ex:centrado_en_usuario .
+
+ex:contrastive rdf:type skos:Concept;
+        skos:prefLabel "Contrastiva"@es;
+        skos:definition "Presenta la explicación a partir del contraste entre dos opciones."@es;
+        skos:broader ex:centrado_en_usuario .
+
+ex:context_centered rdf:type skos:Concept;
+        skos:prefLabel "Centrado en el contexto"@es;
+        skos:definition "Utiliza el contexto para presentar la información."@es;
+        skos:broader ex:type .
+
+ex:secuential rdf:type skos:Concept;
+        skos:prefLabel "Secuencial"@es;
+        skos:definition "Presenta la explicación mediante una secuencia de sucesos."@es;
+        skos:broader ex:context_centered .
+
+ex:causal rdf:type skos:Concept;
+        skos:prefLabel "Causal"@es;
+        skos:definition "Presenta la explicación a partir del origen de un suceso."@es;
+        skos:broader ex:context_centered .
+
+# Formato
+ex:format rdf:type skos:Concept;
+    skos:prefLabel "Formato"@es;
+    skos:definition "Estructura de información que representa la explicación."@es;
+    owl:isPartOf ex:explanation .
+
+ex:verbal_comunication rdf:type skos:Concept;
+        skos:prefLabel "Comunicación Verbal"@es;
+        skos:definition "Formato de explicación que utiliza palabras para representar la información."@es;
+        skos:broader ex:format .
+
+ex:non_verbal_comunication rdf:type skos:Concept;
+        skos:prefLabel "Comunicación No Verbal"@es;
+        skos:definition "Formato de explicación que no utiliza palabras para representar la información."@es;
+        skos:broader ex:format .
+
+ex:visual rdf:type skos:Concept;
+        skos:prefLabel "Visual"@es;
+        skos:definition "Utiliza imágenes o video para representar la información."@es;
+        skos:broader ex:non_verbal_comunication .
+
+ex:expresivity rdf:type skos:Concept;
+        skos:prefLabel "Expresividad"@es;
+        skos:definition "Utiliza la capacidad física del sistema para representar la información."@es;
+        skos:broader ex:non_verbal_comunication .
+
+ex:numeric rdf:type skos:Concept;
+        skos:prefLabel "Numérica"@es;
+        skos:definition "Utiliza valores numerales para representar la información."@es;
+        skos:broader ex:non_verbal_comunication .
+
+ex:multimodal rdf:type skos:Concept;
+        skos:prefLabel "Multimodal"@es;
+        skos:definition "Formato de explicación que combina la comunicación verbal y no verbal."@es;
+        skos:broader ex:format .
+
+# Associate all concepts with the scheme
+ex:explanation skos:inScheme ex:explanationScheme .
+ex:temporality skos:inScheme ex:explanationScheme .
+ex:prebehavior skos:inScheme ex:explanationScheme .
+ex:real_time skos:inScheme ex:explanationScheme .
+ex:postbehavior skos:inScheme ex:explanationScheme .
+ex:level_of_detail skos:inScheme ex:explanationScheme .
+ex:autonomy skos:inScheme ex:explanationScheme .
+ex:proactive skos:inScheme ex:explanationScheme .
+ex:reactive skos:inScheme ex:explanationScheme .
+ex:type skos:inScheme ex:explanationScheme .
+ex:centrado_en_usuario skos:inScheme ex:explanationScheme .
+ex:probabilistic skos:inScheme ex:explanationScheme .
+ex:contrastive skos:inScheme ex:explanationScheme .
+ex:context_centered skos:inScheme ex:explanationScheme .
+ex:secuential skos:inScheme ex:explanationScheme .
+ex:causal skos:inScheme ex:explanationScheme .
+ex:format skos:inScheme ex:explanationScheme .
+ex:verbal_comunication skos:inScheme ex:explanationScheme .
+ex:non_verbal_comunication skos:inScheme ex:explanationScheme .
+ex:visual skos:inScheme ex:explanationScheme .
+ex:expresivity skos:inScheme ex:explanationScheme .
+ex:numeric skos:inScheme ex:explanationScheme .
+ex:multimodal skos:inScheme ex:explanationScheme .
